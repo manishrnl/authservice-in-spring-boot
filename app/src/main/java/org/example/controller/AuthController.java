@@ -41,8 +41,8 @@ public class AuthController {
             Boolean isSignUped = userDetailsService.signupUser(userInfoDto);
 
             if (!isSignUped) {
-                return new ResponseEntity<>("Users with username : " + userInfoDto.getUsername() +
-                        " already Exist. Try Signing up witg=h different userNames",
+                return new ResponseEntity<>("Users with username : \"" + userInfoDto.getUsername() +
+                        "\" already Exist.Try Signing up with different userNames",
                         HttpStatus.BAD_REQUEST);
             }
 
