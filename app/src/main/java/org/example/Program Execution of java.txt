@@ -1,0 +1,25 @@
+ 1. Request Flow
+   - Client sends an HTTP request to the server
+   - The request is handled by a controller
+   - The controller calls a service to process the request
+   - The service interacts with a repository to fetch or store data
+   - The repository communicates with the database to execute queries
+   - Finally, the response is sent back through the controller to the client
+HTTP Request → Controller → Service → Repository → Database
+
+
+2. Authentication Flow
+   - Client sends authentication credentials (e.g., username and password)
+   - The request is handled by the AuthController
+   - The AuthController calls the AuthService to validate credentials
+   - The AuthService interacts with the UserRepository to check user details
+   - If valid, a token is generated and sent back to the client
+   - The flow can be represented as:
+Client → AuthController → AuthService → UserRepository → Database
+
+3. Data Flow
+    - Request DTOs from `/request` are used to receive data from clients
+    - This data is processed by services
+    -Services use repositories to interact with database
+    - Response DTOs from `/response` are used to send data back to clients
+
