@@ -18,12 +18,12 @@ public class CustomUserDetails extends UserInfo
     private String password;
     Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(UserInfo byUsername) {
-        this.username = byUsername.getUsername();
-        this.password= byUsername.getPassword();
+    public CustomUserDetails(UserInfo userInfo) {
+        this.username = userInfo.getUsername();
+        this.password= userInfo.getPassword();
         List<GrantedAuthority> auths = new ArrayList<>();
 
-        for(UserRole role : byUsername.getRoles()){
+        for(UserRole role : userInfo.getRoles()){
             auths.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
         }
         this.authorities = auths;

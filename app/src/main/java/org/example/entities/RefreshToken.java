@@ -24,6 +24,7 @@ public class RefreshToken {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    //  @Column(unique = true) //unique refresh tokens for each user not recommended
     private String token;
 
     private Instant expiryDate;
