@@ -61,7 +61,7 @@ public class AuthController {
                             .token(refreshToken.getToken())
                             .build(), HttpStatus.OK);
         } catch (Exception ex) {
-            return new ResponseEntity<>(" AuthController.Signup: Exception in User Service While creating account " + ex.getMessage(),
+            return new ResponseEntity<>(" AuthController.Signup: Exception in AuthController While creating account " + ex.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

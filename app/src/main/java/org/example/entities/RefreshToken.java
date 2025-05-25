@@ -24,6 +24,7 @@ public class RefreshToken {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
     //  @Column(unique = true) //unique refresh tokens for each user not recommended
     private String token;
 
@@ -32,4 +33,6 @@ public class RefreshToken {
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "user_id")
     private UserInfo userInfo;
+
+
 }

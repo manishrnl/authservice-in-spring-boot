@@ -23,3 +23,32 @@ Client → AuthController → AuthService → UserRepository → Database
     -Services use repositories to interact with database
     - Response DTOs from `/response` are used to send data back to clients
 
+
+More Detailed view
+
+flowchart LR
+  A[Client] -->|POST /register| B(AuthenticationController.register)
+  B --> C[AuthenticationService.register]
+  C --> D[UserRepository.save(User)]
+  D --> E[JwtService.generateToken(user)]
+  E --> F[TokenRepository.save(Token{token, expiry,…})]
+  F --> G[return AuthenticationResponse{accessToken, refreshToken}]
+  G --> A
+
+  A2[Client] -->|POST /authenticate| B2(AuthenticationController.authenticate)
+  B2 --> C2[AuthenticationService.authenticate]
+  C2 --> H[AuthenticationManager.authenticate()]
+  H --> I[load UserDetails via UserDetailsService]
+  I --> E2[JwtService.generateToken(user)]
+  E2 --> F2[revokeOldTokens & save new Token]
+  F2 --> G2[return AuthenticationResponse{…}]
+  G2 --> A2
+
+  A3[Client] -->|POST /refresh-token| B3(AuthenticationController.refreshToken)
+  B3 --> J[extract refreshToken from header]
+  J --> K[JwtService.validateToken(refreshToken)]
+  K --> L[UserRepository.findByUsername]
+  L --> E3[JwtService.generateToken(user)]
+  E3 --> F3[save new Token & revoke previous]
+  F3 --> G3[write new AccessToken to response body]
+  G3 --> A3
